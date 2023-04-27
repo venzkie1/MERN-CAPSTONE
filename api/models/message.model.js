@@ -14,6 +14,9 @@ const MessageSchema = new Schema({
       type: String,
       required: true,
    },
+   seenAt:{
+      type: Date,
+   }
 },{
     timestamps:true,
 });

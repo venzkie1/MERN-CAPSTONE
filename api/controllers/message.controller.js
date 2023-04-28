@@ -12,14 +12,12 @@ export const createMessage = async (req, res, next) =>{
 
     try {
         const savedMessage = await newMessage.save();
+        if (savedMessage instanceof Message) {
+            console.log('savedMessage is an instance of Message');
+          } else {
+            console.log('savedMessage is not an instance of Message');
+          }
         const isReceiver = !req.isSeller;
-        if (isReceiver) {
-            await savedMessage.populate('userId').execPopulate();
-            const receiver = savedMessage.userId;
-            savedMessage.seenBy = receiver._id;
-            savedMessage.seenAt = Date.now();
-            await savedMessage.save();
-        }
         await Conversation.findOneAndUpdate(
             { id: req.body.conversationId },
             {
@@ -36,13 +34,14 @@ export const createMessage = async (req, res, next) =>{
 
         res.status(201).send(savedMessage);
     } catch (err) {
+        console.log(err);
         next(err);
     }
 }
 
 
 export const getMessages = async (req, res, next) =>{
-
+    console.log('getMessages')
     try{
         const messages = await Message.find({ conversationId: req.params.id });
         const users = await User.find({ _id: { $in: messages.map(m => m.userId) } });

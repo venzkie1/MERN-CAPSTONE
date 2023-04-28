@@ -11,6 +11,8 @@ import authRoute from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import cors from "cors";
 import helmet from "helmet";
+// import Message from './models/message.model.js';
+
 
 const app = express();
 
@@ -23,6 +25,7 @@ try {
     await mongoose.connect(process.env.MONGO); //URI, yarn add dotenv to prevent error 
 console.log('connected to MongoDB');
 
+  // await Message.deleteMany({}); (delete all the data from the table Messages)
   } catch (error) {
     console.log(error);
   }

@@ -19,6 +19,7 @@ const MessageSchema = new Schema({
    }
 },{
     timestamps:true,
+    toJSON: {virtuals: true}
 });
 
 export default mongoose.model("Message", MessageSchema);

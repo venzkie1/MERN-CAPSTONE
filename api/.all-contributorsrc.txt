@@ -1,0 +1,8 @@
+{
+  "login": "kevinmembreve32@gmail.com",
+  "name": "Kevin Membreve",
+  "contributions": [
+    "code",
+    "documentation"
+  ]
+}

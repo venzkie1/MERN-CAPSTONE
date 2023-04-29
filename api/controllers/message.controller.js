@@ -13,9 +13,7 @@ export const createMessage = async (req, res, next) =>{
     try {
         const savedMessage = await newMessage.save();
         if (savedMessage instanceof Message) {
-            console.log('savedMessage is an instance of Message');
           } else {
-            console.log('savedMessage is not an instance of Message');
           }
         const isReceiver = !req.isSeller;
         await Conversation.findOneAndUpdate(
@@ -41,7 +39,6 @@ export const createMessage = async (req, res, next) =>{
 
 
 export const getMessages = async (req, res, next) =>{
-    console.log('getMessages')
     try{
         const messages = await Message.find({ conversationId: req.params.id });
         const users = await User.find({ _id: { $in: messages.map(m => m.userId) } });
